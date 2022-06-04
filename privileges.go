@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"os"
+	"runtime"
 	"syscall"
 
 	"github.com/syndtr/gocapability/capability"
@@ -52,6 +53,8 @@ func setNetAdminCap() error {
 }
 
 func RunCommandAsNetAdmin(command []string) error {
+	runtime.LockOSThread()
+	defer runtime.UnlockOSThread()
 	setNetAdminCap()
 	if len(command) == 0 {
 		return errors.New("no command provided")
