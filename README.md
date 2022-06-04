@@ -12,3 +12,4 @@ Using:
     ./netns-util enter [netns name] [command]
     ./netns-util enter-netadmin [netns name] [command]
     ./netns-util moveto [netns name] [link]
+    ./netns-util netadmin [command]

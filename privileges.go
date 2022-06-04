@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"os"
 	"syscall"
 
@@ -47,5 +48,17 @@ func setNetAdminCap() error {
 		return err
 	}
 
+	return nil
+}
+
+func RunCommandAsNetAdmin(command []string) error {
+	setNetAdminCap()
+	if len(command) == 0 {
+		return errors.New("no command provided")
+	}
+	err := runCommand(command)
+	if err != nil {
+		return err
+	}
 	return nil
 }

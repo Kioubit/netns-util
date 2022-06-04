@@ -24,8 +24,15 @@ func main() {
 			fmt.Println(err.Error())
 			os.Exit(1)
 		}
+
 	case "moveto":
 		err := setLinkToNetns(os.Args[3], os.Args[2])
+		if err != nil {
+			fmt.Println(err.Error())
+			os.Exit(1)
+		}
+	case "netadmin":
+		err := RunCommandAsNetAdmin(args[2:])
 		if err != nil {
 			fmt.Println(err.Error())
 			os.Exit(1)
@@ -41,5 +48,6 @@ func printUsage(name string) {
 	fmt.Println(name, "enter [netns name] [command]")
 	fmt.Println(name, "enter-netadmin [netns name] [command]")
 	fmt.Println(name, "moveto [netns name] [link]")
+	fmt.Println(name, "netadmin [command]")
 	os.Exit(2)
 }
